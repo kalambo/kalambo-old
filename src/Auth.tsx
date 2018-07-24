@@ -65,13 +65,13 @@ export default r
         }))
         .yield(({ state, next }) => (
           <Div style={{ layout: 'bar', width: '100%', height: '100%' }}>
-            <Div style={{ layout: 'stack', spacing: 25, marginTop: -100 }}>
+            <Div style={{ layout: 'stack', spacing: 35, marginTop: -150 }}>
               <div>
                 <img
                   src={icon}
                   style={{
                     width: 'auto',
-                    height: 70,
+                    height: 60,
                     display: 'block',
                     margin: '0 auto',
                   }}

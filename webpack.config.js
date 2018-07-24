@@ -1,5 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const liveData = false;
 
 module.exports = {
   entry: './src/index.tsx',
@@ -29,21 +32,20 @@ module.exports = {
   },
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
   plugins: [
-    // new webpack.DefinePlugin({
-    //   SERVER_URL: JSON.stringify(
-    //     process.env.WEBPACK_SERVE
-    //       ? 'http://localhost:3000'
-    //       : 'https://data.kalambo.org',
-    //   ),
-    //   SITE_URL: JSON.stringify(
-    //     process.env.WEBPACK_SERVE
-    //       ? 'http://localhost:8080'
-    //       : 'https://www.kalambo.org',
-    //   ),
-    // }),
     new webpack.DefinePlugin({
-      SERVER_URL: JSON.stringify('https://data.kalambo.org'),
-      SITE_URL: JSON.stringify('http://localhost:8080'),
+      SERVER_URL: JSON.stringify(
+        process.env.WEBPACK_SERVE && !liveData
+          ? 'http://localhost:3000'
+          : 'https://data.kalambo.org',
+      ),
+      SITE_URL: JSON.stringify(
+        process.env.WEBPACK_SERVE
+          ? 'http://localhost:8080'
+          : 'https://www.kalambo.org',
+      ),
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Kalambo',
     }),
   ],
 };
