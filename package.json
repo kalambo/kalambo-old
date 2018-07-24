@@ -1,0 +1,36 @@
+{
+  "name": "kalambo",
+  "version": "1.0.0",
+  "license": "MIT",
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "scripts": {
+    "prettier": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "build": "webpack",
+    "dev": "webpack-serve"
+  },
+  "dependencies": {
+    "@types/react": "^16.4.7",
+    "@types/react-dom": "^16.0.6",
+    "common": "https://github.com/kalambo/common",
+    "common-client": "https://github.com/kalambo/common-client",
+    "d3-selection": "^1.3.0",
+    "deep-equal": "^1.0.1",
+    "elmnt": "^0.6.2",
+    "file-loader": "^1.1.11",
+    "prettier": "^1.13.7",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-helmet": "^5.2.0",
+    "refluent": "^0.2.0",
+    "rgo": "^0.3.13",
+    "ts-loader": "^4.4.2",
+    "typescript": "^2.9.2",
+    "webfontloader": "^1.6.28",
+    "webpack": "^4.16.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-serve": "^2.0.2"
+  }
+}
