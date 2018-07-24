@@ -11,7 +11,7 @@ import rgo, { resolvers } from 'rgo';
 
 import Auth from './Auth';
 import colors from './colors';
-import Explorer from './Explorer';
+import Explorer from './explorer';
 import Input from './Input';
 import types from './types';
 
