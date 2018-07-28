@@ -21,7 +21,14 @@ const dataToRows = (
           !f.startsWith('#') &&
           f !== 'id' &&
           context.editable(type, f);
-        const schemaField = type && root.rgo.schema[type!][f];
+        const schemaField = type && {
+          ...root.rgo.schema[type][f],
+          meta: {
+            ...root.rgo.schema[type][f],
+            ...((context.meta[type] && context.meta[type][f]) ||
+              {}),
+          },
+        };
         return [
           [
             {

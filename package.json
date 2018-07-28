@@ -31,7 +31,7 @@
     "ts-loader": "^4.4.2",
     "typescript": "^2.9.2",
     "webfontloader": "^1.6.28",
-    "webpack": "^4.16.2",
+    "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0",
     "webpack-serve": "^2.0.2"
   }

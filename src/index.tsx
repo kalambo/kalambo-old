@@ -161,6 +161,32 @@ const style = {
   },
 };
 
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+const now = new Date();
+const availabilityOptions = Array.from({ length: 24 }).map(
+  (_, i) => new Date(now.getFullYear(), now.getMonth() + i),
+);
+const availabilityLabels = availabilityOptions.map(
+  d =>
+    `${months[d.getMonth()]} ${d
+      .getFullYear()
+      .toString()
+      .slice(2)}`,
+);
+
 const App = r
   .yield(Auth)
   .do((_a, _b, commit) => {
@@ -185,6 +211,14 @@ const App = r
       <Explorer
         config={config}
         types={types}
+        meta={{
+          ww_people: {
+            availability: {
+              options: availabilityOptions,
+              labels: availabilityLabels,
+            },
+          },
+        }}
         editable={(type, field) => {
           const { scalar, isList, meta = {} } = root.rgo.schema[type][
             field

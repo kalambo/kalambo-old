@@ -53,6 +53,11 @@ export default r
     dataRows: dataToRows(context, query, data),
   }))
   .do('context', (context, push) =>
+    context.store.listen('editing', (editing = {} as any) =>
+      push({ isEditing: !!editing.key }),
+    ),
+  )
+  .do('context', (context, push) =>
     context.store.listen('unchanged', (unchanged = {}) => push({ unchanged })),
   )
   .yield(
@@ -93,7 +98,15 @@ export default r
               if (elems[i] !== inputRef) {
                 elems[i].textContent = props$().context.config.printValue(
                   editing.value,
-                  root.rgo.schema[splitKey[0]][splitKey[2]],
+                  {
+                    ...root.rgo.schema[splitKey[0]][splitKey[2]],
+                    meta: {
+                      ...root.rgo.schema[splitKey[0]][splitKey[2]],
+                      ...((props$().context.meta[splitKey[0]] &&
+                        props$().context.meta[splitKey[0]][splitKey[2]]) ||
+                        {}),
+                    },
+                  },
                 );
               }
             }
@@ -105,8 +118,9 @@ export default r
         'context',
         'dataRows',
         'style',
+        'isEditing',
         'unchanged',
-        (context, dataRows, style, unchanged) => {
+        (context, dataRows, style, _, unchanged) => {
           const editing = context.store.get('editing') || {};
 
           const rows = d3
@@ -201,10 +215,14 @@ export default r
               } else {
                 ReactDOM.unmountComponentAtNode(this);
                 if (editing.key === key) {
-                  this.textContent = context.config.printValue(
-                    editing.value,
-                    root.rgo.schema[type][field],
-                  );
+                  this.textContent = context.config.printValue(editing.value, {
+                    ...root.rgo.schema[type][field],
+                    meta: {
+                      ...root.rgo.schema[type][field],
+                      ...((context.meta[type] && context.meta[type][field]) ||
+                        {}),
+                    },
+                  });
                 } else {
                   this.textContent = text;
                 }
