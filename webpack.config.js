@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const liveData = false;
 
@@ -44,8 +45,7 @@ module.exports = {
           : 'https://www.kalambo.org',
       ),
     }),
-    new HtmlWebpackPlugin({
-      title: 'Kalambo',
-    }),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new CopyWebpackPlugin([{ from: 'static', to: '' }]),
   ],
 };

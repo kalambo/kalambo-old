@@ -251,9 +251,6 @@ root.rgo = rgo(
   process.env.NODE_ENV !== 'production',
 );
 
-const div = document.createElement('div');
-div.style.height = '100%';
-document.body.appendChild(div);
 ReactDOM.render(
   <>
     <Helmet title="Kalambo">
@@ -267,10 +264,13 @@ ReactDOM.render(
         html {
           background: #f6f6f6;
         }
+        #root {
+          height: 100%;
+        }
         `}
       </style>
     </Helmet>
     <App />
   </>,
-  div,
+  document.getElementById('root'),
 );
