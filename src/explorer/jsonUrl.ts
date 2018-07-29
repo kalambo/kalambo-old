@@ -19,6 +19,9 @@ const stringify = v => {
       return '~"' + encode(v);
     case 'object':
       if (!v) return '~null';
+      if (Object.prototype.toString.call(v) === '[object Date]') {
+        return '~@' + v.getTime();
+      }
       return `~(${
         Array.isArray(v)
           ? v.map(x => stringify(x) || '~null').join('') || '~'
@@ -108,6 +111,10 @@ const parse = str => {
         case '"':
           i++;
           result = decode();
+          break;
+        case '@':
+          i++;
+          result = new Date(parseInt(decode(), 10));
           break;
         default:
           const beg = i++;

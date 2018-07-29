@@ -9,6 +9,15 @@ import d3, { applyStyle } from './d3';
 import dataToRows from './dataToRows';
 import isolate from './isolate';
 
+const getContent = (context, type, field, value) =>
+  context.config.printValue(value, {
+    ...root.rgo.schema[type][field],
+    meta: {
+      ...(root.rgo.schema[type][field] && root.rgo.schema[type][field].meta),
+      ...((context.meta[type] && context.meta[type][field]) || {}),
+    },
+  });
+
 export default r
   .do(
     restyle(style => {
@@ -96,17 +105,11 @@ export default r
             const elems = elem.querySelectorAll(`[data-key='${editing.key}']`);
             for (let i = 0; i < elems.length; i++) {
               if (elems[i] !== inputRef) {
-                elems[i].textContent = props$().context.config.printValue(
+                elems[i].textContent = getContent(
+                  props$().context,
+                  splitKey[0],
+                  splitKey[2],
                   editing.value,
-                  {
-                    ...root.rgo.schema[splitKey[0]][splitKey[2]],
-                    meta: {
-                      ...root.rgo.schema[splitKey[0]][splitKey[2]],
-                      ...((props$().context.meta[splitKey[0]] &&
-                        props$().context.meta[splitKey[0]][splitKey[2]]) ||
-                        {}),
-                    },
-                  },
                 );
               }
             }
@@ -215,14 +218,12 @@ export default r
               } else {
                 ReactDOM.unmountComponentAtNode(this);
                 if (editing.key === key) {
-                  this.textContent = context.config.printValue(editing.value, {
-                    ...root.rgo.schema[type][field],
-                    meta: {
-                      ...root.rgo.schema[type][field],
-                      ...((context.meta[type] && context.meta[type][field]) ||
-                        {}),
-                    },
-                  });
+                  this.textContent = getContent(
+                    context,
+                    type,
+                    field,
+                    editing.value,
+                  );
                 } else {
                   this.textContent = text;
                 }

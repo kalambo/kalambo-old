@@ -24,9 +24,8 @@ const dataToRows = (
         const schemaField = type && {
           ...root.rgo.schema[type][f],
           meta: {
-            ...root.rgo.schema[type][f],
-            ...((context.meta[type] && context.meta[type][f]) ||
-              {}),
+            ...(root.rgo.schema[type][f] && root.rgo.schema[type][f].meta),
+            ...((context.meta[type] && context.meta[type][f]) || {}),
           },
         };
         return [
