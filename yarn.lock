@@ -1210,9 +1210,9 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
-elmnt@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/elmnt/-/elmnt-0.6.4.tgz#158b84ff44ba1cd93c932e7028d1794217d31c25"
+elmnt@^0.6.4, elmnt@^0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/elmnt/-/elmnt-0.6.5.tgz#c7ac5a79fc4545ad862ef519c9ba1bc7dd417e73"
   dependencies:
     "@types/react" "^16.4.7"
     commonmark "^0.28.1"

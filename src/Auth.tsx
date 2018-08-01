@@ -167,6 +167,7 @@ export default r
                     value={email}
                     onChange={setEmail}
                     spellCheck={false}
+                    rows={-1}
                     invalid={state === 'attempted' && !email}
                     style={fieldStyle}
                   />
