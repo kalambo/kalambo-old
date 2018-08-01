@@ -46,11 +46,10 @@ const fieldStyle = {
 export default r
   .do((_, push) => ({
     token:
-      typeof sessionStorage !== 'undefined' &&
-      sessionStorage.getItem('authToken'),
+      typeof localStorage !== 'undefined' && localStorage.getItem('authToken'),
     setToken: token => push({ token }),
     logOut: () => {
-      sessionStorage.removeItem('authToken');
+      localStorage.removeItem('authToken');
       window.rgo.flush();
       push({ token: null });
     },
@@ -121,7 +120,7 @@ export default r
               });
               const token = await result.text();
               if (result.ok && token) {
-                sessionStorage.setItem('authToken', token);
+                localStorage.setItem('authToken', token);
                 setToken(token);
               } else {
                 push({ email: null, password: null });

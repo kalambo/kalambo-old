@@ -176,8 +176,8 @@ const months = [
   'Dec',
 ];
 const now = new Date();
-const availabilityOptions = Array.from({ length: 24 }).map(
-  (_, i) => new Date(now.getFullYear(), now.getMonth() + i),
+const availabilityOptions = Array.from({ length: 18 }).map(
+  (_, i) => new Date(Date.UTC(now.getFullYear(), now.getMonth() + i)),
 );
 const availabilityLabels = availabilityOptions.map(
   d =>
@@ -244,8 +244,7 @@ const App = r
 root.rgo = rgo(
   resolvers.fetch(SERVER_URL, () => {
     const token =
-      typeof sessionStorage !== 'undefined' &&
-      sessionStorage.getItem('authToken');
+      typeof localStorage !== 'undefined' && localStorage.getItem('authToken');
     return token ? { Authorization: `Bearer ${token}` } : null;
   }),
   process.env.NODE_ENV !== 'production',
