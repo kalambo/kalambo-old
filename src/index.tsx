@@ -175,9 +175,8 @@ const months = [
   'Nov',
   'Dec',
 ];
-const now = new Date();
 const availabilityOptions = Array.from({ length: 18 }).map(
-  (_, i) => new Date(Date.UTC(now.getFullYear(), now.getMonth() + i)),
+  (_, i) => new Date(Date.UTC(2018, 6 + i)),
 );
 const availabilityLabels = availabilityOptions.map(
   d =>
