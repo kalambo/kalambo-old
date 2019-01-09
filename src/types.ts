@@ -35,6 +35,7 @@ export default {
       ['status', 'Status'],
       ['interviewdate', 'Interview date'],
       ['notes', 'Notes'],
+      ['coaching', 'Coaching'],
 
       ['af_thrivesunderpressure1', 'AF thrives under pressure 1'],
       ['af_motivationanddrive1', 'AF motivation and drive 1'],
